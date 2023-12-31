@@ -1,0 +1,18 @@
+[package]
+name = "emulator"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+fern_colored = "0.6.1"
+log = { version = "0.4.20", features = [] }
+chrono = "0.4.31"
+fern = { version = "0.6.2", features = ["colored"] }
+env_logger = "0.10.1"
+time = "0.3.31"
+humantime = { version = "2.1.0", features = [] }
+clap = { version = "4.4.12", features = [] }
+hexdump = "0.1.1"
+byteorder = "1.5.0"
