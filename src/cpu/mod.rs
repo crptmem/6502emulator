@@ -1,4 +1,4 @@
-use std::process::exit;
+#[warn(dead_code)]
 use log::{debug, info};
 
 use crate::cpu::memory::Memory;
