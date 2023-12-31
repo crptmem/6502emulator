@@ -5,7 +5,6 @@ use crate::cpu::memory::Memory;
 pub mod memory;
 pub mod instructions;
 
-#[warn(dead_code)]
 #[derive(Debug)]
 pub struct Registers {
     a: u8,
