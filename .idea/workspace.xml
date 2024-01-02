@@ -7,16 +7,7 @@
     <cargoProject FILE="$PROJECT_DIR$/Cargo.toml" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d792a46f-2c9c-4f86-9f4c-0afeb59b055d" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/emulator.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/emulator.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cpu/bus.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/cpu/bus.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cpu/memory.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/cpu/memory.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cpu/mod.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/cpu/mod.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/devices.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/devices.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/devices/output.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/devices/output.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.rs" afterDir="false" />
-    </list>
+    <list default="true" id="d792a46f-2c9c-4f86-9f4c-0afeb59b055d" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -48,8 +39,8 @@
     "Cargo.Run.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "/home/corruptmemory/Downloads/JetBrains-Discord-Integration-v232-2.0.8.zip",
+    "git-widget-placeholder": "Merging main",
+    "last_opened_file_path": "/home/corruptmemory/RustroverProjects/emulator/rom",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -58,7 +49,7 @@
     "org.rust.cargo.project.model.PROJECT_DISCOVERY": "true",
     "org.rust.disableDetachedFileInspection/home/corruptmemory/RustroverProjects/emulator/src/cpu.rs": "true",
     "org.rust.disableDetachedFileInspection/home/corruptmemory/RustroverProjects/emulator/src/devices/output.rs": "true",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable",
+    "settings.editor.selected.configurable": "language.rust.cargo.check",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -112,7 +103,7 @@
       <workItem from="1704193113467" duration="9000" />
       <workItem from="1704193209362" duration="226000" />
       <workItem from="1704193440733" duration="3079000" />
-      <workItem from="1704196526628" duration="1698000" />
+      <workItem from="1704196526628" duration="6291000" />
     </task>
     <servers />
   </component>

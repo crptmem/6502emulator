@@ -1,3 +1,4 @@
+use std::process::exit;
 use log::{debug, info};
 use crate::cpu::bus::Bus;
 
@@ -55,7 +56,7 @@ impl CPU {
                 i: 0,
                 z: 0,
                 c: 0,
-                stack_pointer: 0,
+                stack_pointer: 0xff,
                 program_counter: 0,
             },
             bus: Bus {
@@ -73,12 +74,15 @@ impl CPU {
     }
 
     pub fn execute(&mut self) {
-        let start = 0x0600;
+        let mut start = 0x0600;
         debug!("Executing: 0xFFFC is {:#06x}", start);
+        let mut ret_addr = 0x0600;
         for _ in 0..1024 {
             let opcode = self.memory.read((start + self.registers.program_counter) as usize);
 
-            //debug!("opcode: {:#04x}", opcode);
+            if opcode != 0x00 {
+                //debug!("opcode: {:#04x} at {:#06x}", opcode, start + self.registers.program_counter);
+            }
 
             self.registers.program_counter += 1;
 
@@ -92,14 +96,27 @@ impl CPU {
 
             if opcode == 0xA9 {
                 let byte = self.memory.read((start + self.registers.program_counter) as usize);
-                //debug!("Writing {:#04x} in A register", byte);
+                debug!("Writing {:#04x} in A register", byte);
                 self.registers.a = byte;
             }
 
             if opcode == 0x8D {
                 let addr = self.memory.read_word((start + self.registers.program_counter) as usize);
-                //debug!("Writing {:#04x} to memory address {:#06x}", self.registers.a, addr);
+                debug!("Writing {:#04x} to memory address {:#06x}", self.registers.a, addr);
                 self.memory.write(addr as usize, self.registers.a);
+            }
+
+            if opcode == 0x69 {
+                let byte = self.memory.read((start + self.registers.program_counter) as usize);
+                self.registers.x += byte;
+            }
+
+            if opcode == 0xE8 {
+                self.registers.x += 1;
+            }
+
+            if opcode == 0xAA {
+                self.registers.x = self.registers.a
             }
 
             if opcode == 0xA2 {
@@ -112,6 +129,27 @@ impl CPU {
                 let byte = self.memory.read((start + self.registers.program_counter) as usize);
                 //debug!("Writing {:#04x} in Y register", byte);
                 self.registers.y = byte;
+            }
+
+            if opcode == 0x4C {
+                let word = self.memory.read_word((start + self.registers.program_counter) as usize);
+                debug!("Jumping to {:#06x} from {:#06x}", word, start + self.registers.program_counter);
+                self.registers.program_counter = 0;
+                start = word;
+            }
+
+            if opcode == 0x20 {
+                let word = self.memory.read_word((start + self.registers.program_counter) as usize);
+                debug!("JSR to {:#06x} from {:#06x}", word, start + self.registers.program_counter);
+                ret_addr = start + self.registers.program_counter;
+                self.registers.program_counter = 0;
+                start = word;
+            }
+
+            if opcode == 0x60 {
+                debug!("RTS to {:#06x}", ret_addr);
+                self.registers.program_counter = 0;
+                start = ret_addr;
             }
         }
         debug!("CPU registers: {:?}", self.registers);
@@ -131,7 +169,7 @@ impl CPU {
             i: 0,
             z: 0,
             c: 0,
-            stack_pointer: 0,
+            stack_pointer: 0xff,
             program_counter: 0,
         };
     }
