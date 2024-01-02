@@ -68,7 +68,7 @@ impl CPU {
     }
 
     pub fn load(&mut self, program: Vec<u8>) {
-        assert!(0x0600 + program.len() / 2 <= self.memory.content.len());
+        assert!(0x0600 + program.len() <= self.memory.content.len());
         self.memory.content[0x0600..(0x0600 + program.len())].copy_from_slice(&program[..]);
         info!("Loaded program to 0x0600 - {:#06x}", 0x0600 + program.len());
     }
@@ -98,17 +98,20 @@ impl CPU {
                 let byte = self.memory.read((start + self.registers.program_counter) as usize);
                 debug!("Writing {:#04x} in A register", byte);
                 self.registers.a = byte;
+                self.registers.program_counter += 1;
             }
 
             if opcode == 0x8D {
                 let addr = self.memory.read_word((start + self.registers.program_counter) as usize);
                 debug!("Writing {:#04x} to memory address {:#06x}", self.registers.a, addr);
                 self.memory.write(addr as usize, self.registers.a);
+                self.registers.program_counter += 2;
             }
 
             if opcode == 0x69 {
                 let byte = self.memory.read((start + self.registers.program_counter) as usize);
                 self.registers.x += byte;
+                self.registers.program_counter += 1;
             }
 
             if opcode == 0xE8 {
@@ -123,12 +126,14 @@ impl CPU {
                 let byte = self.memory.read((start + self.registers.program_counter) as usize);
                 //debug!("Writing {:#04x} in X register", byte);
                 self.registers.x = byte;
+                self.registers.program_counter += 1;
             }
 
             if opcode == 0xA0 {
                 let byte = self.memory.read((start + self.registers.program_counter) as usize);
                 //debug!("Writing {:#04x} in Y register", byte);
                 self.registers.y = byte;
+                self.registers.program_counter += 1;
             }
 
             if opcode == 0x4C {
@@ -136,6 +141,7 @@ impl CPU {
                 debug!("Jumping to {:#06x} from {:#06x}", word, start + self.registers.program_counter);
                 self.registers.program_counter = 0;
                 start = word;
+                self.registers.program_counter += 2;
             }
 
             if opcode == 0x20 {
