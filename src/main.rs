@@ -4,10 +4,13 @@ use std::io::Read;
 
 use chrono::Local;
 use fern::colors::{Color, ColoredLevelConfig};
+use log::info;
+use crate::devices::output::read_output;
 
 use crate::cpu::CPU;
 
 pub mod cpu;
+pub mod devices;
 
 fn get_file_as_byte_vec(filename: &String) -> Vec<u8> {
     let mut f = File::open(&filename).expect("No file found");
@@ -43,7 +46,7 @@ fn main() {
     let mut cpu = CPU::new();
     let args: Vec<String> = env::args().collect();
     let mut rom: Vec<u8> = Vec::from([
-        0xA9, 49, 0x8D, 0x20, 0x00
+        0xA9, 0x51, 0x8D, 0x00, 0x20
     ]);
     setup_logging();
     if args.len() >= 2 {
@@ -54,6 +57,6 @@ fn main() {
     }
     cpu.load(rom);
     cpu.execute();
-    cpu.memory.read_output();
+    read_output(&mut cpu);
     cpu.reset();
 }
