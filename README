@@ -1,0 +1,15 @@
+6502emulator
+============
+It is not fully accurate. This project is more like for education about how the CPU works.
+
+ROM
+===
+Currently the generate.py script is able to generate ROM files that can print some ASCII text to output device (0x2000, 256 bytes size).
+
+Instructions
+============
+At this moment, I've implemented LDA, LDX, LDY and STA
+
+Usage
+=====
+cargo run rom/generated.bin
